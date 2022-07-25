@@ -76,7 +76,7 @@ void gtkgreet_update_clocks(struct GtkGreet *gtkgreet) {
     if (now_tm == NULL) {
         return;
     }
-    snprintf(gtkgreet->time, 8, "%02d:%02d", now_tm->tm_hour, now_tm->tm_min);
+    snprintf(gtkgreet->time, 8, "%02d:%02d", ((now_tm->tm_hour + 12) % 12) + 1, now_tm->tm_min);
     for (guint idx = 0; idx < gtkgreet->windows->len; idx++) {
         struct Window *ctx = g_array_index(gtkgreet->windows, struct Window*, idx);
         window_update_clock(ctx);
